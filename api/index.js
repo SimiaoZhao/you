@@ -9,7 +9,7 @@ const ObjectService = require("@operandinc/sdk").ObjectService;
 // Open AI Configuration
 const configuration = new Configuration({
   organization: "org-MgzdcfxN4df81USJrxl9cH4M",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -56,12 +56,13 @@ app.post("/", async (req, res) => {
 
   let operandSearch = await runIndex(message);
 
-  const basePromptPrefix = `This is a conversation between simiao zhao and himself. He is recently starting a startup with his friends`;
+  const basePromptPrefix = `This is a conversation between simiao zhao and himself. He is recently starting a startup with his friends. He is a Phd student in Oxford. He is 25 years old.`;
   // const basePromptPrefix = `This is a conversation between sim and himself.\nRelevant information that Siraj knows:\n${operandSearch}`;
 
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `${basePromptPrefix}\n\nsimiao zhao:${message}\n\nsimiao:`,
+    prompt: `${basePromptPrefix}\n\nsimiao zhao:${message}\\simiao will say:`,
+    // prompt: `${basePromptPrefix}`,
     max_tokens: 256,
     temperature: 0.7,
   });
